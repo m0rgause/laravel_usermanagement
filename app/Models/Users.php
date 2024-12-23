@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Users extends Model
+{
+    use HasFactory;
+
+    protected $table = 'users';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'id',
+        'nama',
+        'email',
+        'password',
+        'status',
+        'last_login',
+        'reset_token',
+        'register_token',
+        'group_id',
+    ];
+
+    public $incrementing = false;
+    protected $keyType = 'string';
+
+    protected $hidden = ['password'];
+
+    public function group()
+    {
+        return $this->belongsTo(GroupPath::class, 'group_id', 'id');
+    }
+
+    public function approvals()
+    {
+        return $this->hasMany(UserApproval::class, 'user_id', 'id');
+    }
+}
