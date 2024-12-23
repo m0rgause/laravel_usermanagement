@@ -32,5 +32,11 @@ Route::middleware([IsLoggedIn::class])->group(function () {
         Route::get('/', [AuthController::class, 'login'])->name('signin');
         Route::post('/', [AuthController::class, 'loginProcess'])->name('signin.process');
     });
+
+    Route::get('forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot-password');
+    Route::post('forgot-password', [AuthController::class, 'forgotPasswordProcess'])->name('forgot-password.process');
+
+    Route::get('reset-password/{token}', [AuthController::class, 'resetPassword'])->name('reset-password');
+    Route::post('reset-password/{token}', [AuthController::class, 'resetPasswordProcess'])->name('reset-password.process');
 });
 Route::get('signout', [AuthController::class, 'logout'])->name('signout');

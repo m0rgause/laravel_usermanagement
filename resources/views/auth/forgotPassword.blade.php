@@ -32,13 +32,14 @@
                             </div>
                             <!--end auth-logo-box-->
                             <div class="text-center auth-logo-text">
-                                <h4 class="mt-0 mb-3 mt-5">Login</h4>
+                                <h4 class="mt-0 mb-3 mt-5">Forgot Password</h4>
                                 <p class="text-muted ">{{ $sysprofile['systitle'] }}</p>
                             </div>
                             @include('layout.notif')
 
                             <!--end auth-logo-text-->
-                            <form class="form-horizontal auth-form my-4" action="{{ route('signin') }}" method="post">
+                            <form class="form-horizontal auth-form my-4" action="{{ route('forgot-password.process') }}"
+                                method="post">
                                 @csrf
                                 <div class="form-group">
                                     <label for="email">Email</label>
@@ -56,32 +57,6 @@
                                 </div>
                                 <!--end form-group-->
 
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <div class="input-group mb-3">
-                                        <span class="auth-form-icon">
-                                            <i class="dripicons-lock"></i>
-                                        </span>
-                                        <input type="password" name="password" value="{{ old('password') }}"
-                                            class="form-control @error('password') is-invalid @enderror" id="password"
-                                            placeholder="Enter password">
-                                    </div>
-                                    @error('password')
-                                        <small class="form-text text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                                <!--end form-group-->
-
-                                <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <a href="{{ url('forgot-password') }}" class="text-muted font-13"><i
-                                                class="dripicons-lock"></i>
-                                            Forgot password?</a>
-                                    </div>
-                                    <div class="col-sm-6">
-                                    </div>
-                                </div>
-
                                 <div class="form-group mt-4">
                                     <div class="g-recaptcha" data-sitekey="{{ env('CAPTCHA_SITE_KEY') }}"></div>
                                 </div>
@@ -89,8 +64,9 @@
                                 <div class="form-group mb-0 row">
                                     <div class="col-12 mt-2">
                                         <button type="submit"
-                                            class="btn btn-primary btn-round btn-block waves-effect waves-light">Log In
-                                            <i class="fas fa-sign-in-alt ml-1"></i></button>
+                                            class="btn btn-primary btn-round btn-block waves-effect waves-light">Kirim
+                                            Link
+                                            <i class="fas fa-envelope ml-1"></i></button>
                                     </div>
                                     <!--end col-->
                                 </div>

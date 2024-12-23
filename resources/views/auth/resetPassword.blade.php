@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta charset="utf-8" />
+<title>{{ $sysprofile['systitle'] }}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<head>
-    <meta charset="utf-8" />
-    <title>{{ $sysprofile['systitle'] }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- App favicon -->
+<link rel="shortcut icon" href="{{ asset('sysprofile/' . $sysprofile['syslogo']) }}">
 
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('sysprofile/' . $sysprofile['syslogo']) }}">
-
-    <!-- App css -->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" type="text/css" />
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<!-- App css -->
+<link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" type="text/css" />
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body class="account-body">
-    <!-- Log In page -->
+    <!-- Reset Password page -->
     <div class="row vh-100 ">
         <div class="col-12 align-self-center">
             <div class="auth-page">
@@ -32,39 +30,25 @@
                             </div>
                             <!--end auth-logo-box-->
                             <div class="text-center auth-logo-text">
-                                <h4 class="mt-0 mb-3 mt-5">Login</h4>
+                                <h4 class="mt-0 mb-3 mt-5">Reset Password</h4>
                                 <p class="text-muted ">{{ $sysprofile['systitle'] }}</p>
                             </div>
                             @include('layout.notif')
 
                             <!--end auth-logo-text-->
-                            <form class="form-horizontal auth-form my-4" action="{{ route('signin') }}" method="post">
+                            <form class="form-horizontal auth-form my-4"
+                                action="{{ route('reset-password.process', $token) }}" method="post">
                                 @csrf
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <div class="input-group mb-3">
-                                        <span class="auth-form-icon">
-                                            <i class="dripicons-user"></i>
-                                        </span>
-                                        <input type="email" name="email" value="{{ old('email') }}"
-                                            class="form-control @error('email') is-invalid @enderror" id="email"
-                                            placeholder="Enter email">
-                                    </div>
-                                    @error('email')
-                                        <small class="form-text text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                                <!--end form-group-->
 
                                 <div class="form-group">
-                                    <label for="password">Password</label>
+                                    <label for="password">New Password</label>
                                     <div class="input-group mb-3">
                                         <span class="auth-form-icon">
                                             <i class="dripicons-lock"></i>
                                         </span>
-                                        <input type="password" name="password" value="{{ old('password') }}"
+                                        <input type="password" name="password"
                                             class="form-control @error('password') is-invalid @enderror" id="password"
-                                            placeholder="Enter password">
+                                            placeholder="Enter new password">
                                     </div>
                                     @error('password')
                                         <small class="form-text text-danger">{{ $message }}</small>
@@ -72,15 +56,17 @@
                                 </div>
                                 <!--end form-group-->
 
-                                <div class="form-group row">
-                                    <div class="col-sm-6">
-                                        <a href="{{ url('forgot-password') }}" class="text-muted font-13"><i
-                                                class="dripicons-lock"></i>
-                                            Forgot password?</a>
-                                    </div>
-                                    <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="password_confirmation">Confirm New Password</label>
+                                    <div class="input-group mb-3">
+                                        <span class="auth-form-icon">
+                                            <i class="dripicons-lock"></i>
+                                        </span>
+                                        <input type="password" name="password_confirmation" class="form-control"
+                                            id="password_confirmation" placeholder="Confirm new password">
                                     </div>
                                 </div>
+                                <!--end form-group-->
 
                                 <div class="form-group mt-4">
                                     <div class="g-recaptcha" data-sitekey="{{ env('CAPTCHA_SITE_KEY') }}"></div>
@@ -89,8 +75,9 @@
                                 <div class="form-group mb-0 row">
                                     <div class="col-12 mt-2">
                                         <button type="submit"
-                                            class="btn btn-primary btn-round btn-block waves-effect waves-light">Log In
-                                            <i class="fas fa-sign-in-alt ml-1"></i></button>
+                                            class="btn btn-primary btn-round btn-block waves-effect waves-light">Reset
+                                            Password
+                                            <i class="fas fa-key ml-1"></i></button>
                                     </div>
                                     <!--end col-->
                                 </div>
@@ -111,7 +98,7 @@
         <!--end col-->
     </div>
     <!--end row-->
-    <!-- End Log In page -->
+    <!-- End Reset Password page -->
 
     <script>
         // when enter key is pressed
