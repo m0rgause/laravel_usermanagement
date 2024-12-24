@@ -22,7 +22,7 @@ class AuthController extends Controller
         $result = $this->_captcha();
 
         if (!$result->success) {
-            return redirect()->back()->with('error', 'Captcha verification failed');
+            return redirect()->back()->with('error', 'Captcha verification failed')->withInput();
         }
 
         // validate the request
@@ -59,10 +59,10 @@ class AuthController extends Controller
 
                 return redirect()->to($user->landing_page);
             } else {
-                return redirect()->back()->with('error', 'Email or password is incorrect');
+                return redirect()->back()->with('error', 'Email or password is incorrect')->withInput();
             }
         } else {
-            return redirect()->back()->with('error', 'Email tidak terdaftar, atau akun belum aktif');
+            return redirect()->back()->with('error', 'Email tidak terdaftar, atau akun belum aktif')->withInput();
         }
     }
 
