@@ -35,7 +35,7 @@
                                 <h4 class="mt-0 mb-3 mt-5">Login</h4>
                                 <p class="text-muted ">{{ $sysprofile['systitle'] }}</p>
                             </div>
-                            @include('layout.notif')
+                            @include('layouts.notif')
 
                             <!--end auth-logo-text-->
                             <form class="form-horizontal auth-form my-4" action="{{ route('signin') }}" method="post">

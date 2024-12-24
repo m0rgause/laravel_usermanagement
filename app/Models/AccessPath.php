@@ -14,6 +14,7 @@ class AccessPath extends Model
     protected $primaryKey = 'id';
     protected $table = 'access_path';
     public $incrementing = false;
+    public $timestamps = false;
     protected $keyType = 'string';
 
     protected $fillable = [

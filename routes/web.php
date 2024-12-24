@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Set\Access;
 use App\Http\Middleware\AuthGuard;
 use App\Http\Middleware\IsLoggedIn;
 
@@ -21,10 +22,19 @@ Route::middleware([AuthGuard::class])->group(function () {
         return view('welcome');
     })->name('home');
 
-    Route::get('dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Route::prefix('setaccess')->group(function () {
+    //     Route::get('/', [Access::class, 'index'])->name('setaccess');
+    //     Route::get('new', [Access::class, 'create'])->name('setaccess.new');
+    // });
+
+    Route::get('setaccess', [Access::class, 'index'])->name('setaccess');
+    Route::get('setaccess/new', [Access::class, 'create'])->name('setaccess.new');
+    Route::post('setaccess/new', [Access::class, 'store'])->name('setaccess.store');
+    Route::get('setaccess/{id}', [Access::class, 'edit'])->name('setaccess.edit');
+    Route::put('setaccess/{id}', [Access::class, 'update'])->name('setaccess.update');
+    Route::delete('setaccess/{id}', [Access::class, 'destroy'])->name('setaccess.destroy');
 });
+
 
 
 Route::middleware([IsLoggedIn::class])->group(function () {

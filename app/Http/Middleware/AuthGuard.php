@@ -32,6 +32,7 @@ class AuthGuard
         $controller = $request->route()->getPrefix();
         $group_id = session()->get('group_id');
 
+
         $groupAccess = GroupAccess::join('access_path', 'group_access.access_id', '=', 'access_path.id')
             ->where('group_id', $group_id)
             ->where('link', $controller)
