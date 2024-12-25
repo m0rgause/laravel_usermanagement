@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class GroupPath extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     protected $table = 'group_path';
 
@@ -20,6 +21,7 @@ class GroupPath extends Model
 
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
 
     public function groupAccesses()
     {

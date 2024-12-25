@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Set\Access;
+use App\Http\Controllers\Set\Group;
 use App\Http\Controllers\Set\UserManagement;
 use App\Http\Middleware\AuthGuard;
 use App\Http\Middleware\IsLoggedIn;
@@ -23,6 +24,7 @@ Route::middleware([AuthGuard::class])->group(function () {
         return view('welcome');
     })->name('home');
 
+    // Access
     Route::get('setaccess', [Access::class, 'index'])->name('setaccess');
     Route::get('setaccess/new', [Access::class, 'create'])->name('setaccess.new');
     Route::post('setaccess/new', [Access::class, 'store'])->name('setaccess.store');
@@ -30,6 +32,7 @@ Route::middleware([AuthGuard::class])->group(function () {
     Route::put('setaccess/{id}', [Access::class, 'update'])->name('setaccess.update');
     Route::delete('setaccess/{id}', [Access::class, 'destroy'])->name('setaccess.destroy');
 
+    // User Management
     Route::get('setusermanagement', [UserManagement::class, 'index'])->name('setusermanagement');
     Route::get('setusermanagement/new', [UserManagement::class, 'create'])->name('setusermanagement.new');
     Route::post('setusermanagement/new', [UserManagement::class, 'store'])->name('setusermanagement.store');
@@ -40,6 +43,16 @@ Route::middleware([AuthGuard::class])->group(function () {
     Route::put('setusermanagement/reset/{id}', [UserManagement::class, 'resetProcess'])->name('setusermanagement.reset.process');
     Route::get('setusermanagement/apv/{id}', [UserManagement::class, 'approval'])->name('setusermanagement.apv');
     Route::put('setusermanagement/apv/{id}', [UserManagement::class, 'approvalProcess'])->name('setusermanagement.apv.process');
+
+    // Group
+    Route::get('setgroup', [Group::class, 'index'])->name('setgroup');
+    Route::get('setgroup/new', [Group::class, 'create'])->name('setgroup.new');
+    Route::post('setgroup/new', [Group::class, 'store'])->name('setgroup.store');
+    Route::get('setgroup/{id}', [Group::class, 'edit'])->name('setgroup.edit');
+    Route::put('setgroup/{id}', [Group::class, 'update'])->name('setgroup.update');
+    Route::delete('setgroup/{id}', [Group::class, 'destroy'])->name('setgroup.destroy');
+    Route::get('setgroup/access/{id}', [Group::class, 'access'])->name('setgroup.access');
+    Route::put('setgroup/access/{id}', [Group::class, 'accessProcess'])->name('setgroup.access.process');
 });
 
 
