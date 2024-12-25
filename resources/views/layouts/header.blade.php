@@ -23,9 +23,6 @@
                     <span class="ml-1 nav-user-name">{{ session('name') }} <i class="mdi mdi-chevron-down"></i> </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="{{ url('setusermanagement/resetself/' . session('id')) }}"><i
-                            class="dripicons-lock text-muted mr-2"></i> Reset Password</a>
-                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ route('signout') }}"><i
                             class="dripicons-exit text-muted mr-2"></i>
                         Logout</a>
