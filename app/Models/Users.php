@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Users extends Model
 {
     use HasFactory;
+    use HasUuids;
 
     protected $table = 'users';
     public $timestamps = false;
@@ -36,6 +38,6 @@ class Users extends Model
 
     public function approvals()
     {
-        return $this->hasMany(UserApproval::class, 'user_id', 'id');
+        return $this->hasMany(UserApproval::class, 'approved_by', 'id');
     }
 }

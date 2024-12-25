@@ -17,14 +17,14 @@ class AuthGuard
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!session()->has('isLoggedIn')) {
+        if (!session()->has('isLoggedIn')) { // check if user is logged in
             return redirect()->route('signin')->with('error', 'Silahkan login terlebih dahulu');
         }
 
         $expires_in = session('expires_in');
         $current_time = time();
 
-        if ($expires_in < $current_time) {
+        if ($expires_in < $current_time) { // check if session is expired
             session()->flush();
             return redirect()->route('signin')->with('error', 'Sesi login telah berakhir, silahkan login kembali');
         }
@@ -38,9 +38,9 @@ class AuthGuard
             ->where('link', $controller)
             ->first();
 
-        if (!$groupAccess) {
+        if (empty($groupAccess)) { // check if user has access to the controller
             $landingPage = GroupPath::where('id', $group_id)->first();
-            return redirect()->to($landingPage->landing_page);
+            return redirect()->route($landingPage->landing_page);
         }
 
         return $next($request);

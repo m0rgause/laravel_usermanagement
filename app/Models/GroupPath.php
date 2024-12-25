@@ -28,6 +28,6 @@ class GroupPath extends Model
 
     public function users()
     {
-        return $this->hasMany(User::class, 'group_id', 'id');
+        return $this->hasMany(Users::class, 'group_id', 'id');
     }
 }

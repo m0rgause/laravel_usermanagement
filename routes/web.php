@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Set\Access;
+use App\Http\Controllers\Set\UserManagement;
 use App\Http\Middleware\AuthGuard;
 use App\Http\Middleware\IsLoggedIn;
 
@@ -22,17 +23,23 @@ Route::middleware([AuthGuard::class])->group(function () {
         return view('welcome');
     })->name('home');
 
-    // Route::prefix('setaccess')->group(function () {
-    //     Route::get('/', [Access::class, 'index'])->name('setaccess');
-    //     Route::get('new', [Access::class, 'create'])->name('setaccess.new');
-    // });
-
     Route::get('setaccess', [Access::class, 'index'])->name('setaccess');
     Route::get('setaccess/new', [Access::class, 'create'])->name('setaccess.new');
     Route::post('setaccess/new', [Access::class, 'store'])->name('setaccess.store');
     Route::get('setaccess/{id}', [Access::class, 'edit'])->name('setaccess.edit');
     Route::put('setaccess/{id}', [Access::class, 'update'])->name('setaccess.update');
     Route::delete('setaccess/{id}', [Access::class, 'destroy'])->name('setaccess.destroy');
+
+    Route::get('setusermanagement', [UserManagement::class, 'index'])->name('setusermanagement');
+    Route::get('setusermanagement/new', [UserManagement::class, 'create'])->name('setusermanagement.new');
+    Route::post('setusermanagement/new', [UserManagement::class, 'store'])->name('setusermanagement.store');
+    Route::get('setusermanagement/{id}', [UserManagement::class, 'edit'])->name('setusermanagement.edit');
+    Route::put('setusermanagement/{id}', [UserManagement::class, 'update'])->name('setusermanagement.update');
+    Route::delete('setusermanagement/{id}', [UserManagement::class, 'destroy'])->name('setusermanagement.destroy');
+    Route::get('setusermanagement/reset/{id}', [UserManagement::class, 'reset'])->name('setusermanagement.reset');
+    Route::put('setusermanagement/reset/{id}', [UserManagement::class, 'resetProcess'])->name('setusermanagement.reset.process');
+    Route::get('setusermanagement/apv/{id}', [UserManagement::class, 'approval'])->name('setusermanagement.apv');
+    Route::put('setusermanagement/apv/{id}', [UserManagement::class, 'approvalProcess'])->name('setusermanagement.apv.process');
 });
 
 
