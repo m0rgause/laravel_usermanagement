@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Set\Access;
 use App\Http\Controllers\Set\Group;
+use App\Http\Controllers\Set\SystemProfile;
 use App\Http\Controllers\Set\UserManagement;
 use App\Http\Middleware\AuthGuard;
 use App\Http\Middleware\IsLoggedIn;
@@ -53,6 +54,17 @@ Route::middleware([AuthGuard::class])->group(function () {
     Route::delete('setgroup/{id}', [Group::class, 'destroy'])->name('setgroup.destroy');
     Route::get('setgroup/access/{id}', [Group::class, 'access'])->name('setgroup.access');
     Route::put('setgroup/access/{id}', [Group::class, 'accessProcess'])->name('setgroup.access.process');
+
+    // System Profile
+    Route::get('setsystemprofile', [SystemProfile::class, 'index'])->name('setsysprofile');
+    Route::get('setsystemprofile/new', [SystemProfile::class, 'create'])->name('setsysprofile.new');
+    Route::post('setsystemprofile/new', [SystemProfile::class, 'store'])->name('setsysprofile.store');
+    Route::get('setsystemprofile/{id}', [SystemProfile::class, 'edit'])->name('setsysprofile.edit');
+    Route::put('setsystemprofile/{id}', [SystemProfile::class, 'update'])->name('setsysprofile.update');
+    Route::get('setsystemprofile/upload/{id}', [SystemProfile::class, 'upload'])->name('setsysprofile.upload');
+    Route::put('setsystemprofile/upload/{id}', [SystemProfile::class, 'uploadProcess'])->name('setsysprofile.upload.process');
+    Route::delete('setsystemprofile/{id}', [SystemProfile::class, 'destroy'])->name('setsysprofile.destroy');
+    Route::delete('setsystemprofile/logo/{id}', [SystemProfile::class, 'destroyLogo'])->name('setsysprofile.destroy.logo');
 });
 
 

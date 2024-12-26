@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class SysProfile extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     protected $table = 'sys_profile';
 
@@ -19,5 +20,6 @@ class SysProfile extends Model
     ];
 
     public $incrementing = false;
+    public $timestamps = false;
     protected $keyType = 'string';
 }
